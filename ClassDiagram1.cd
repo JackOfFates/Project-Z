@@ -1,0 +1,293 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ProjectZ.[Shared].Animations.Animation">
+    <Position X="6.25" Y="2.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>CAMCAAAAICACFEkAAAAAAAAAAAAAAAAIAAQiAAAABAE=</HashCode>
+      <FileName>Shared\Animations\Animation.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Animations.ColorAnimation">
+    <Position X="4.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Shared\Animations\ColorAnimation.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Animations.DoubleAnimation">
+    <Position X="4.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Shared\Animations\DoubleAnimation.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Animations.Timeline">
+    <Position X="4.5" Y="2.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAUAgIAAAAAAAAIAYAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>Shared\Animations\Timeline.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Animations.Properties.WidthProperty" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shared\Animations\Properties\ElementProperty.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Animations.Properties.HeightProperty" Collapsed="true">
+    <Position X="0.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shared\Animations\Properties\ElementProperty.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Animations.Properties.LeftProperty" Collapsed="true">
+    <Position X="0.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shared\Animations\Properties\ElementProperty.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Animations.Properties.TopProperty" Collapsed="true">
+    <Position X="0.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shared\Animations\Properties\ElementProperty.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Animations.Properties.BackgroundColorProperty" Collapsed="true">
+    <Position X="0.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Shared\Animations\Properties\ElementProperty.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Animations.Properties.ForegroundColorProperty" Collapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Shared\Animations\Properties\ElementProperty.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Animations.Properties.FillColorProperty" Collapsed="true">
+    <Position X="0.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Shared\Animations\Properties\ElementProperty.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Animations.Properties.MouseOverBackgroundColorProperty" Collapsed="true">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Shared\Animations\Properties\ElementProperty.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Animations.Properties.MouseDownBackgroundColorProperty" Collapsed="true">
+    <Position X="0.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Shared\Animations\Properties\ElementProperty.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Animations.Properties.SpriteProgressProperty" Collapsed="true">
+    <Position X="0.5" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Shared\Animations\Properties\ElementProperty.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Animations.Properties.TrackbarValueProperty" Collapsed="true">
+    <Position X="0.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAgAAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Shared\Animations\Properties\ElementProperty.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Animations.Properties.ElementProperty" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAgAAAAAAAAAAAAAAQAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shared\Animations\Properties\ElementProperty.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Content.ContentContainer" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AFAAAAAAAgAAAABAAAAAAAAAAAAAAgAAAAAGEAAAAAA=</HashCode>
+      <FileName>Shared\Content\ContentContainer.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Content.Fonts" Collapsed="true">
+    <Position X="4.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shared\Content\Fonts.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Content.SpriteCollection" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAABQAAAAAAQEAAAAAIAAAAAAAgAAAAE=</HashCode>
+      <FileName>Shared\Content\SpriteCollection.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ProjectZ.[Shared].Content.Textures" Collapsed="true">
+    <Position X="4.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAAAAAgAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Shared\Content\Textures.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Drawing.Scene">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <Members>
+      <Field Name="_DrawFPS" Hidden="true" />
+      <Field Name="_FPS" Hidden="true" />
+      <Field Name="_MillisecondDelay" Hidden="true" />
+      <Field Name="_MouseState" Hidden="true" />
+      <Field Name="DebugHeaderColor" Hidden="true" />
+      <Field Name="DebugHeaderRectangle" Hidden="true" />
+      <Field Name="DebugHeaderSize" Hidden="true" />
+      <Field Name="DebugPosition" Hidden="true" />
+      <Field Name="DebugRectangle" Hidden="true" />
+      <Field Name="DebugTextPosition" Hidden="true" />
+      <Property Name="GUID_INDEX" Hidden="true" />
+      <Field Name="I_DrawFPS" Hidden="true" />
+      <Property Name="I_Elements" Hidden="true" />
+      <Field Name="OneSecond" Hidden="true" />
+      <Property Name="RemoveQueue" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="ProjectZ.[Shared].Drawing.Scene.DebugParameters" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Shared\Drawing\Scene.vb</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>IghAEUAGZQChg4sIAAAUF0ASuDKa4QQCFFFEAYCqVAE=</HashCode>
+      <FileName>Shared\Drawing\Scene.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Drawing.SceneManager">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>BIAAEAIcAAAAAkAAgAAAgAABAopQsCCAKRgYCAAMQAg=</HashCode>
+      <FileName>Shared\Drawing\SceneManager.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Drawing.UI.Advanced.PolygonElement" Collapsed="true">
+    <Position X="2.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAkCAAgASAgAABAIAgARIBIAIABQIhCIAAAgAABA=</HashCode>
+      <FileName>Shared\Drawing\UI\Advanced\PolygonElement.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Drawing.UI.Advanced.SpriteElement" Collapsed="true">
+    <Position X="2.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AADAAFAAAAAGAgABAAAEAAQSIADAAggACAAAAAAARAE=</HashCode>
+      <FileName>Shared\Drawing\UI\Advanced\SpriteElement.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Drawing.UI.Input.Button" Collapsed="true">
+    <Position X="2.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AggCHAAEAABiBoAgEAgkQACQDAgIAgCAIAwACAASBEY=</HashCode>
+      <FileName>Shared\Drawing\UI\Input\Button.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Drawing.UI.Input.Textbox" Collapsed="true">
+    <Position X="2.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UAAACEEAYAhgEgABBQgkIQCRfAAYMAggIAQASAICVAc=</HashCode>
+      <FileName>Shared\Drawing\UI\Input\Textbox.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Drawing.UI.Input.PreTextInputEventArgs" Collapsed="true">
+    <Position X="2.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAACQAACAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shared\Drawing\UI\Input\Textbox.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Drawing.UI.Input.TextChangedEventArgs" Collapsed="true">
+    <Position X="2.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAEAEQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shared\Drawing\UI\Input\Textbox.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Drawing.UI.Trackbar" Collapsed="true">
+    <Position X="2.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAABAAAAAAABAhAAIEAYAAAAQGAAgAoAAAAgAAACBAI=</HashCode>
+      <FileName>Shared\Drawing\UI\Input\Trackbar.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Drawing.UI.SceneElement">
+    <Position X="11.25" Y="0.5" Width="1.5" />
+    <Members>
+      <Property Name="zIndex" Hidden="true" />
+    </Members>
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>goJIaUQ4VwAAo4IxkABAkTKKELHgAAQAFMAQEACA8QA=</HashCode>
+      <FileName>Shared\Drawing\UI\SceneElement.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Drawing.UI.Primitives.PrimitiveBatch" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAACECAAAAAAEAgAAAAAAAAYECAAAAoAgIAoAAA=</HashCode>
+      <FileName>Shared\Drawing\UI\Primitives\PrimitiveBatch.vb</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Left" Position="0.1" Collapsed="true" />
+  </Class>
+  <Class Name="ProjectZ.[Shared].Drawing.UI.Primitives.RectangleElement" Collapsed="true">
+    <Position X="2.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAgAAAAAAAAAACAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Shared\Drawing\UI\Primitives\RectangleElement.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectZ.[Shared].Drawing.UI.TextElement" Collapsed="true">
+    <Position X="2.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>RAAACAAAAAAgQgAAAAAAAAAAAAAAAAAAAAAACAACAAI=</HashCode>
+      <FileName>Shared\Drawing\UI\Text\TextElement.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Module Name="ProjectZ.[Shared].Extensions.PointExtension" Collapsed="true">
+    <Position X="4.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shared\Extensions\PointExtension.vb</FileName>
+    </TypeIdentifier>
+  </Module>
+  <Module Name="ProjectZ.[Shared].Extensions.VertexExtension" Collapsed="true">
+    <Position X="6.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAAAAAQAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>Shared\Extensions\VertexExtension.vb</FileName>
+    </TypeIdentifier>
+  </Module>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

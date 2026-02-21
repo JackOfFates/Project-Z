@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	<TargetFramework>net8.0-windows</TargetFramework>
+	<RootNamespace>ProjectZ</RootNamespace>
+	<AssemblyName>Project Z</AssemblyName>
+	<OptionStrict>On</OptionStrict>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	<UseWindowsForms>true</UseWindowsForms>
+	<EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<OutputType>Library</OutputType>
+	<UseApplicationFramework>True</UseApplicationFramework>
+	<SingleInstance>True</SingleInstance>
+	<EnableVisualStyles>True</EnableVisualStyles>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Project Z Test\**" />
+    <None Remove="Project Z Test\**" />
+  </ItemGroup>
+
+  <!-- MonoGame DesktopGL (OpenGL) -->
+  <ItemGroup>
+    <PackageReference Include="nkast.Kni.Platform.SDL2.GL" Version="4.2.9001.1" />
+    <PackageReference Include="nkast.Xna.Framework.Graphics" Version="4.2.9001" />
+    <PackageReference Include="SocketJack" Version="1.2.3" />
+    <PackageReference Include="Speckle.Triangle" Version="1.0.0" />
+  </ItemGroup>
+
+  <!-- Project references retained as project references -->
+  <ItemGroup>
+    <ProjectReference Include="..\Project Z Extensions\Project Z Extensions.vbproj" />
+  </ItemGroup>
+
+  <!-- Keep resources -->
+  <ItemGroup>
+    <None Include=".github\copilot-instructions.md" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <Compile Update="Properties\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Resources\FXAA.mgfx">
+      <LogicalName>ProjectZ.Resources.FXAA.mgfx</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Shared\Drawing\Designer\DesignTime\" />
+  </ItemGroup>
+
+  <!-- Include all VB code files by default (SDK-style) -->
+
+</Project>

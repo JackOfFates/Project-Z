@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+# SharpDevelop 4.3
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Project Z Windows", "Project Z Windows.vbproj", "{E9E196FD-A8F1-40E1-A096-6A264B3FE1CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project Z Windows.Converted", "..\Project Z Windows.ConvertedToC#\Project Z Windows.Converted.csproj", "{347A7A44-F2C5-4851-9125-E2F7167CDD4F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E9E196FD-A8F1-40E1-A096-6A264B3FE1CD}.Debug|x86.Build.0 = Debug|x86
+		{E9E196FD-A8F1-40E1-A096-6A264B3FE1CD}.Debug|x86.ActiveCfg = Debug|x86
+		{E9E196FD-A8F1-40E1-A096-6A264B3FE1CD}.Release|x86.Build.0 = Release|x86
+		{E9E196FD-A8F1-40E1-A096-6A264B3FE1CD}.Release|x86.ActiveCfg = Release|x86
+		{347A7A44-F2C5-4851-9125-E2F7167CDD4F}.Debug|x86.Build.0 = Debug|x86
+		{347A7A44-F2C5-4851-9125-E2F7167CDD4F}.Debug|x86.ActiveCfg = Debug|x86
+		{347A7A44-F2C5-4851-9125-E2F7167CDD4F}.Release|x86.Build.0 = Release|x86
+		{347A7A44-F2C5-4851-9125-E2F7167CDD4F}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+EndGlobal
