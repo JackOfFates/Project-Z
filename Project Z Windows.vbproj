@@ -4,7 +4,7 @@
   <PropertyGroup>
 	<TargetFramework>net8.0-windows</TargetFramework>
 	<RootNamespace>ProjectZ</RootNamespace>
-	<AssemblyName>Project-Z</AssemblyName>
+	<AssemblyName>ProjectZ</AssemblyName>
 	<OptionStrict>On</OptionStrict>
 	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 	<UseWindowsForms>true</UseWindowsForms>
@@ -16,6 +16,12 @@
 	<EnableVisualStyles>True</EnableVisualStyles>
 	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	<Version>2.0.0.0</Version>
+	<Title>Project Z</Title>
+	<Description>An XNA UI Framework that runs on modern .NET 8.0</Description>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<PackageIcon>256x256 UI framework(1).png</PackageIcon>
+	<PackageProjectUrl>https://github.com/JackOfFates/Project-Z</PackageProjectUrl>
+	<PackageLicenseFile>License.txt</PackageLicenseFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,12 +31,14 @@
     <Compile Remove="Project Z Tower Defense\**" />
     <Compile Remove="Project Z Video FX\**" />
     <Compile Remove="Project Z.sln.ide\**" />
+    <Compile Remove="ProjectTemplate\**" />
     <None Remove="Project Z Application\**" />
     <None Remove="Project Z Audio\**" />
     <None Remove="Project Z Test\**" />
     <None Remove="Project Z Tower Defense\**" />
     <None Remove="Project Z Video FX\**" />
     <None Remove="Project Z.sln.ide\**" />
+    <None Remove="ProjectTemplate\**" />
   </ItemGroup>
 
   <!-- MonoGame DesktopGL (OpenGL) -->
@@ -45,6 +53,14 @@
 
   <!-- Keep resources -->
   <ItemGroup>
+    <None Include="..\..\..\..\Downloads\256x256 UI framework(1).png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\SocketJack\SocketJack\License.txt">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
     <None Include=".github\copilot-instructions.md" />
     <None Include=".github\upgrades\scenarios\new-dotnet-version_64215c\plan.md" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -63,6 +79,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Shared\Drawing\Designer\DesignTime\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
   <!-- Include all VB code files by default (SDK-style) -->

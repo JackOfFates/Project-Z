@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>$safeprojectname$</RootNamespace>
+    <AssemblyName>$projectname$</AssemblyName>
+    <UseWindowsForms>True</UseWindowsForms>
+    <PlatformTarget>x86</PlatformTarget>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <OptionStrict>On</OptionStrict>
+    <StartupObject>$safeprojectname$.Program</StartupObject>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="My Project\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="nkast.Kni.Platform.SDL2.GL" Version="4.2.9001.1" />
+    <PackageReference Include="Speckle.Triangle" Version="1.0.0" />
+  </ItemGroup>
+  <!--
+    TODO: Add a reference to the Project Z shared library.
+    If you have it as a project in your solution, use a ProjectReference:
+      <ProjectReference Include="..\Project Z Windows.vbproj" />
+    If it is published as a NuGet package, use a PackageReference instead.
+  -->
+  <ItemGroup>
+    <ProjectReference Include="..\Project Z Windows.vbproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.vb" />
+    <Compile Include="GameWindow.vb" />
+    <Compile Include="GameWindow_Generated.vb" />
+    <Compile Include="Properties\AssemblyInfo.vb" />
+    <Compile Include="Scenes\MainScene.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\Fonts\" />
+    <Folder Include="Content\Textures\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp" />
+  </ItemGroup>
+</Project>
