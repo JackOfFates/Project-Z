@@ -413,4 +413,110 @@ Namespace DesignTime
 
 #End Region
 
+#Region "PolygonElement"
+
+    ''' <summary>
+    ''' Design-time PolygonElement - renders as a WPF Polygon inside a Canvas.
+    ''' </summary>
+    Public Class PolygonElement
+        Inherits Canvas
+
+        Private ReadOnly _polygon As Polygon
+
+        Public Shared ReadOnly XProperty As DependencyProperty =
+            DependencyProperty.Register("X", GetType(Double), GetType(PolygonElement),
+                New PropertyMetadata(0.0, AddressOf OnPositionChanged))
+
+        Public Shared ReadOnly YProperty As DependencyProperty =
+            DependencyProperty.Register("Y", GetType(Double), GetType(PolygonElement),
+                New PropertyMetadata(0.0, AddressOf OnPositionChanged))
+
+        Public Shared ReadOnly FillColorProperty As DependencyProperty =
+            DependencyProperty.Register("FillColor", GetType(String), GetType(PolygonElement),
+                New PropertyMetadata("#FFFFFF", AddressOf OnFillColorChanged))
+
+        Public Shared ReadOnly PointsProperty As DependencyProperty =
+            DependencyProperty.Register("Points", GetType(String), GetType(PolygonElement),
+                New PropertyMetadata("", AddressOf OnPointsChanged))
+
+        Public Property X As Double
+            Get
+                Return CDbl(GetValue(XProperty))
+            End Get
+            Set(value As Double)
+                SetValue(XProperty, value)
+            End Set
+        End Property
+
+        Public Property Y As Double
+            Get
+                Return CDbl(GetValue(YProperty))
+            End Get
+            Set(value As Double)
+                SetValue(YProperty, value)
+            End Set
+        End Property
+
+        Public Property FillColor As String
+            Get
+                Return CStr(GetValue(FillColorProperty))
+            End Get
+            Set(value As String)
+                SetValue(FillColorProperty, value)
+            End Set
+        End Property
+
+        ''' <summary>
+        ''' Comma-separated list of X,Y pairs (e.g. "0,0 50,0 50,50 0,50").
+        ''' </summary>
+        Public Property Points As String
+            Get
+                Return CStr(GetValue(PointsProperty))
+            End Get
+            Set(value As String)
+                SetValue(PointsProperty, value)
+            End Set
+        End Property
+
+        Private Shared Sub OnPositionChanged(d As DependencyObject, e As DependencyPropertyChangedEventArgs)
+            Dim element = DirectCast(d, PolygonElement)
+            Canvas.SetLeft(element, element.X)
+            Canvas.SetTop(element, element.Y)
+        End Sub
+
+        Private Shared Sub OnFillColorChanged(d As DependencyObject, e As DependencyPropertyChangedEventArgs)
+            Dim element = DirectCast(d, PolygonElement)
+            element.UpdateFillColor()
+        End Sub
+
+        Private Sub UpdateFillColor()
+            Try
+                _polygon.Fill = DirectCast(New BrushConverter().ConvertFromString(FillColor), Brush)
+            Catch
+                _polygon.Fill = Brushes.White
+            End Try
+        End Sub
+
+        Private Shared Sub OnPointsChanged(d As DependencyObject, e As DependencyPropertyChangedEventArgs)
+            Dim element = DirectCast(d, PolygonElement)
+            element.UpdatePoints()
+        End Sub
+
+        Private Sub UpdatePoints()
+            Try
+                _polygon.Points = PointCollection.Parse(Points)
+            Catch
+                _polygon.Points = New PointCollection()
+            End Try
+        End Sub
+
+        Public Sub New()
+            _polygon = New Polygon()
+            _polygon.Fill = Brushes.White
+            Me.Children.Add(_polygon)
+        End Sub
+    End Class
+
+#End Region
+
 End Namespace

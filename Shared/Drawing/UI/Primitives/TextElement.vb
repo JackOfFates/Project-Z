@@ -125,17 +125,26 @@ Namespace [Shared].Drawing.UI.Primitives
                     Return
                 End If
 
-                ' Determine the wrap width
+                ' Determine the wrap width using this priority:
+                ' 1. Explicit MaxWidth property
+                ' 2. MaxSize.X constraint (from XAML MaxWidth on the element)
+                ' 3. Parent available width (minus padding and margin)
+                ' 4. No limit
                 Dim wrapWidth As Single = _MaxWidth
-                If wrapWidth <= 0 AndAlso Parent IsNot Nothing Then
-                    wrapWidth = Parent.Size.X - Parent.Padding.Left - Parent.Padding.Right
+                If wrapWidth <= 0 AndAlso MaxSize.X < Single.MaxValue Then
+                    wrapWidth = MaxSize.X
+                End If
+                If wrapWidth <= 0 AndAlso Parent IsNot Nothing AndAlso Parent.Size.X > 0 Then
+                    wrapWidth = Parent.Size.X - Parent.Padding.Left - Parent.Padding.Right - Margin.Left - Margin.Right
                 End If
                 If wrapWidth <= 0 Then
                     wrapWidth = 9999.0F ' No limit
                 End If
 
                 WrappedText = WrapText(_Text, wrapWidth)
-                Size = Scene.MeasureText(Font, If(String.IsNullOrEmpty(WrappedText), " ", WrappedText))
+                Dim measuredSize = Scene.MeasureText(Font, If(String.IsNullOrEmpty(WrappedText), " ", WrappedText))
+                ' Constrain width so text element never reports wider than its wrap boundary
+                Size = New Vector2(Math.Min(measuredSize.X, wrapWidth), measuredSize.Y)
                 Invalidate()
             Finally
                 _isUpdatingText = False

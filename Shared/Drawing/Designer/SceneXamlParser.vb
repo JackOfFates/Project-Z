@@ -4,6 +4,7 @@ Imports ProjectZ.Shared.Drawing.UI.Input
 Imports ProjectZ.Shared.Drawing.UI.Layout
 Imports ProjectZ.Shared.Drawing.UI.Primitives
 Imports System.Collections.Generic
+Imports System.Globalization
 Imports System.IO
 Imports System.Xml
 
@@ -88,8 +89,11 @@ Namespace [Shared].Drawing.Designer
 #Region "Element Factory Registration"
 
         Private Sub RegisterElementFactories()
-            ' Root element
+            ' Root elements
             _elementFactories("Scene") = Function(e) CreateSceneRoot(e)
+            _elementFactories("Window") = Function(e) CreateSceneRoot(e)
+            _elementFactories("UserControl") = Function(e) CreateSceneRoot(e)
+            _elementFactories("Page") = Function(e) CreateSceneRoot(e)
 
             ' Primitives
             _elementFactories("Rectangle") = Function(e) CreateRectangle(e)
@@ -169,7 +173,23 @@ Namespace [Shared].Drawing.Designer
                             childElement.zIndex = childIndex
                         End If
                         childElement.Parent = element
-                        element.Children.Add(childElement)
+                        ' For Grid parents, use AddChild to set attached properties
+                        If TypeOf element Is Grid Then
+                            Dim grid = DirectCast(element, Grid)
+                            Dim gridRow = GetAttributeInteger(childXml, "Grid.Row", 0)
+                            Dim gridCol = GetAttributeInteger(childXml, "Grid.Column", 0)
+                            Dim gridRowSpan = GetAttributeInteger(childXml, "Grid.RowSpan", 1)
+                            Dim gridColSpan = GetAttributeInteger(childXml, "Grid.ColumnSpan", 1)
+                            grid.AddChild(childElement, gridRow, gridCol, gridRowSpan, gridColSpan)
+                        Else
+                            element.Children.Add(childElement)
+                        End If
+                        ' Re-trigger text wrapping now that parent is assigned,
+                        ' so wrap width can be derived from parent bounds.
+                        If TypeOf childElement Is TextElement Then
+                            Dim textEl = DirectCast(childElement, TextElement)
+                            textEl.Text = textEl.Text
+                        End If
                         childIndex += 1
                     End If
                 End If
@@ -180,6 +200,8 @@ Namespace [Shared].Drawing.Designer
 
         Private Sub ApplyCommonProperties(element As SceneElement, xmlElement As XmlElement)
             ' --- Position: Canvas.Left/Top take precedence over X/Y ---
+            ' These values are incorporated into the element's Margin so the
+            ' layout system (AlignChild) uses them as positional offsets.
             Dim x As Single = 0, y As Single = 0
             If xmlElement.HasAttribute("Canvas.Left") Then
                 x = GetAttributeSingle(xmlElement, "Canvas.Left", 0)
@@ -192,13 +214,7 @@ Namespace [Shared].Drawing.Designer
                 y = GetAttributeSingle(xmlElement, "Y", 0)
             End If
 
-            ' --- Grid snapping (snap to common grid edges if close) ---
-            Dim snapThreshold As Single = 8.0F
-            Dim gridEdges() As Single = {0, 220, 1280, 1060, 720, 640, 430, 470, 510, 550, 590, 370, 330, 270, 230, 16, -1000}
-            For Each edge In gridEdges
-                If Math.Abs(x - edge) < snapThreshold Then x = edge
-                If Math.Abs(y - edge) < snapThreshold Then y = edge
-            Next
+            ' Set initial position for immediate use before layout runs
             element.Position = New Vector2(x, y)
 
             ' --- Size: Always set if present, even if zero ---
@@ -231,16 +247,25 @@ Namespace [Shared].Drawing.Designer
             ' IsEnabled
             element.isEnabled = GetAttributeBoolean(xmlElement, "IsEnabled", True)
 
-            ' Margin
+            ' Margin - combine XAML Margin with X/Y position offsets
+            ' The layout system (AlignChild) uses Margin.Left/Top for positioning,
+            ' so X/Y/Canvas.Left/Canvas.Top must be incorporated here.
             Dim marginStr = GetAttributeString(xmlElement, "Margin", "")
+            Dim margin As Thickness
             If Not String.IsNullOrEmpty(marginStr) Then
-                element.Margin = ParseThickness(marginStr)
+                margin = ParseThickness(marginStr)
+            Else
+                margin = New Thickness(0)
             End If
+            If x <> 0 OrElse y <> 0 Then
+                margin = New Thickness(margin.Left + CInt(x), margin.Top + CInt(y), margin.Right, margin.Bottom)
+            End If
+            element.Margin = margin
 
-            ' Padding (for RectangleElement types)
+            ' Padding
             Dim paddingStr = GetAttributeString(xmlElement, "Padding", "")
-            If Not String.IsNullOrEmpty(paddingStr) AndAlso TypeOf element Is RectangleElement Then
-                DirectCast(element, RectangleElement).Padding = ParseThickness(paddingStr)
+            If Not String.IsNullOrEmpty(paddingStr) Then
+                element.Padding = ParseThickness(paddingStr)
             End If
 
             ' Alignment
@@ -281,6 +306,23 @@ Namespace [Shared].Drawing.Designer
             Dim root As New RectangleElement(_scene)
             root.BackgroundColor = Color.Transparent
             root.isMouseBypassEnabled = True
+            root.Padding = New Thickness(0)
+
+            ' Set root size from explicit attributes or fall back to viewport size
+            ' so child text elements can derive wrap width from parent bounds.
+            Dim rootWidth = GetAttributeSingle(xmlElement, "Width", 0)
+            Dim rootHeight = GetAttributeSingle(xmlElement, "Height", 0)
+            If rootWidth <= 0 OrElse rootHeight <= 0 Then
+                Try
+                    If rootWidth <= 0 Then rootWidth = _scene.graphicsDevice.Viewport.Width
+                    If rootHeight <= 0 Then rootHeight = _scene.graphicsDevice.Viewport.Height
+                Catch
+                End Try
+            End If
+            If rootWidth > 0 OrElse rootHeight > 0 Then
+                root.Size = New Vector2(rootWidth, rootHeight)
+            End If
+
             Return root
         End Function
 
@@ -305,7 +347,19 @@ Namespace [Shared].Drawing.Designer
 
         Private Function CreateText(xmlElement As XmlElement) As SceneElement
             Dim text As New TextElement(_scene)
-            text.Text = GetAttributeString(xmlElement, "Text", xmlElement.InnerText.Trim())
+
+            ' Set wrapping parameters BEFORE text content so the initial
+            ' UpdateWrappedText uses the correct wrap width.
+            Dim wrappingStr = GetAttributeString(xmlElement, "TextWrapping", "Wrap")
+            text.TextWrapping = ParseTextWrapping(wrappingStr)
+
+            ' Use MaxWidth if specified, otherwise use Width as the wrapping boundary
+            Dim maxWidth = GetAttributeSingle(xmlElement, "MaxWidth", 0)
+            If maxWidth <= 0 Then
+                maxWidth = GetAttributeSingle(xmlElement, "Width", 0)
+            End If
+            text.MaxWidth = maxWidth
+
             text.ForegroundColor = GetAttributeColor(xmlElement, "Foreground", Color.White)
             If xmlElement.HasAttribute("ForegroundColor") Then
                 text.ForegroundColor = GetAttributeColor(xmlElement, "ForegroundColor", text.ForegroundColor)
@@ -314,15 +368,21 @@ Namespace [Shared].Drawing.Designer
             If Not String.IsNullOrEmpty(fontName) Then
                 text.Font = fontName
             End If
-            ' Handle TextWrapping
-            Dim wrappingStr = GetAttributeString(xmlElement, "TextWrapping", "NoWrap")
-            text.TextWrapping = ParseTextWrapping(wrappingStr)
-            text.MaxWidth = GetAttributeSingle(xmlElement, "MaxWidth", 0)
+
+            ' Set text last so wrapping uses the correct parameters
+            text.Text = GetAttributeString(xmlElement, "Text", xmlElement.InnerText.Trim())
             Return text
         End Function
 
         Private Function CreateButton(xmlElement As XmlElement) As SceneElement
             Dim button As New Button(_scene)
+
+            ' Disable auto-sizing when explicit dimensions are specified in XAML,
+            ' otherwise DoAutoSize() overrides the explicit Width/Height.
+            If xmlElement.HasAttribute("Width") OrElse xmlElement.HasAttribute("Height") Then
+                button.AutoSize = ButtonAutoSize.None
+            End If
+
             button.Text = GetAttributeString(xmlElement, "Content", xmlElement.InnerText.Trim())
             If xmlElement.HasAttribute("Text") Then
                 button.Text = GetAttributeString(xmlElement, "Text", button.Text)
@@ -610,7 +670,7 @@ Namespace [Shared].Drawing.Designer
             Dim str = GetAttributeString(xmlElement, name, "")
             If String.IsNullOrEmpty(str) Then Return defaultValue
             Dim result As Single
-            If Single.TryParse(str, result) Then Return result
+            If Single.TryParse(str, NumberStyles.Float Or NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, result) Then Return result
             Return defaultValue
         End Function
 
@@ -618,7 +678,7 @@ Namespace [Shared].Drawing.Designer
             Dim str = GetAttributeString(xmlElement, name, "")
             If String.IsNullOrEmpty(str) Then Return defaultValue
             Dim result As Double
-            If Double.TryParse(str, result) Then Return result
+            If Double.TryParse(str, NumberStyles.Float Or NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, result) Then Return result
             Return defaultValue
         End Function
 
@@ -626,7 +686,7 @@ Namespace [Shared].Drawing.Designer
             Dim str = GetAttributeString(xmlElement, name, "")
             If String.IsNullOrEmpty(str) Then Return defaultValue
             Dim result As Integer
-            If Integer.TryParse(str, result) Then Return result
+            If Integer.TryParse(str, NumberStyles.Integer, CultureInfo.InvariantCulture, result) Then Return result
             Return defaultValue
         End Function
 
