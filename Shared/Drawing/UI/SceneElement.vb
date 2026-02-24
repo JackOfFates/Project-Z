@@ -234,6 +234,8 @@ Namespace [Shared].Drawing.UI
             End Set
         End Property
         Private _Valid As Boolean = False
+        Private _isValidating As Boolean = False
+        Private _isCheckingValidation As Boolean = False
 
         Public Function isValidated() As Boolean
             Return Valid
@@ -423,8 +425,14 @@ Namespace [Shared].Drawing.UI
 #Region "Container Functionality"
 
         Public Sub ValidationCheck()
-            If Not Valid Then Validate()
-            Children.ForEach(Sub(c) If c IsNot Nothing Then c.ValidationCheck())
+            If _isCheckingValidation Then Return
+            _isCheckingValidation = True
+            Try
+                If Not Valid Then Validate()
+                Children.ForEach(Sub(c) If c IsNot Nothing Then c.ValidationCheck())
+            Finally
+                _isCheckingValidation = False
+            End Try
         End Sub
 
         Public Sub Invalidate()
@@ -433,9 +441,14 @@ Namespace [Shared].Drawing.UI
         End Sub
 
         Private Sub Validate()
-            AlignChildren()
-            If Parent IsNot Nothing Then Parent.Invalidate()
-            Valid = True
+            If _isValidating Then Return
+            _isValidating = True
+            Try
+                AlignChildren()
+                Valid = True
+            Finally
+                _isValidating = False
+            End Try
         End Sub
 
         Private Function HorizontalReserved() As Boolean

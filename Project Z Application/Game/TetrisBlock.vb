@@ -1,8 +1,4 @@
-﻿Imports Zytonic_Framework.Utilities.Timers
-Imports Zytonic_Framework.Math.Arithmetic
-Imports Zytonic_Framework.Extentions
-Imports System.Drawing
-Imports Microsoft.Xna.Framework
+﻿Imports Microsoft.Xna.Framework
 Imports System.Collections.Generic
 
 Public Class TetrisBlock
@@ -59,7 +55,7 @@ Public Class TetrisBlock
     End Sub
     Private Sub AddBlockData(Points As Point())
         For Each P As Point In Points
-            P = P - (New Point(CInt(Math.Floor(Columns / 2) - 1), 0))
+            P = P + (New Point(CInt(Math.Floor(Columns / 2) - 1), 0))
             blockData.Add(P)
         Next
     End Sub
@@ -69,7 +65,7 @@ Public Class TetrisBlock
     Public Overloads Sub Increment(CheckForBottom As Boolean)
         For i As Integer = blockData.Count - 1 To 0 Step -1
             Dim P As New Point(blockData(i).X, blockData(i).Y)
-            P = P - (New Point(0, 1))
+            P = P + (New Point(0, 1))
             If Not pointIsBottom(P) AndAlso (HasReachedBottom = False Or CheckForBottom = False) Then
                 blockData(i) = P
             ElseIf pointIsBottom(P) Then
@@ -124,16 +120,16 @@ Public Class TetrisBlock
     End Sub
     Private Sub DoLeftRotation(I As Integer, S As Point, nOffset As Point, pOffset As Point)
         Dim P As Point = blockData(I)
-        P = P - (nOffset)
+        P = P + (nOffset)
         P = New Point(P.Y, S.X - P.X)
-        P = P - (pOffset)
+        P = P + (pOffset)
         blockData(I) = P
     End Sub
     Private Sub DoRightRotation(I As Integer, S As Point, nOffset As Point, pOffset As Point)
         Dim P As Point = blockData(I)
-        P = P - (nOffset)
+        P = P + (nOffset)
         P = New Point(S.Y - P.Y, P.X)
-        P = P - (pOffset)
+        P = P + (pOffset)
         blockData(I) = P
     End Sub
     Public Function CalculateSize() As Point
@@ -177,19 +173,19 @@ Public Class TetrisBlock
                 Case Direction.Left
                     For i As Integer = 0 To blockData.Count - 1
                         Dim p As Point = blockData(i), o As New Point(-1, 0)
-                        p = p - (o)
+                        p = p + (o)
                         blockData(i) = p
                     Next
                 Case Direction.Right
                     For i As Integer = 0 To blockData.Count - 1
                         Dim p As Point = blockData(i), o As New Point(1, 0)
-                        p = p - (o)
+                        p = p + (o)
                         blockData(i) = p
                     Next
                 Case Direction.Down
                     For i As Integer = 0 To blockData.Count - 1
                         Dim p As Point = blockData(i), o As New Point(0, 1)
-                        p = p - (o)
+                        p = p + (o)
                         blockData(i) = p
                     Next
             End Select
@@ -201,7 +197,7 @@ Public Class TetrisBlock
                 For i As Integer = 0 To blockData.Count - 1
                     Dim p As Point = blockData(i), o As New Point(-1, 0)
                     If p.Y = RowNumber Then
-                        p = p - (o)
+                        p = p + (o)
                         blockData(i) = p
                     End If
                 Next
@@ -209,7 +205,7 @@ Public Class TetrisBlock
                 For i As Integer = 0 To blockData.Count - 1
                     Dim p As Point = blockData(i), o As New Point(1, 0)
                     If p.Y = RowNumber Then
-                        p = p - (o)
+                        p = p + (o)
                         blockData(i) = p
                     End If
                 Next

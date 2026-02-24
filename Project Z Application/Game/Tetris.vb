@@ -1,8 +1,4 @@
-﻿Imports Zytonic_Framework.Utilities.Timers
-Imports Zytonic_Framework.Math.Arithmetic
-Imports Zytonic_Framework.Extentions
-Imports System.Drawing
-Imports Microsoft.Xna.Framework
+﻿Imports Microsoft.Xna.Framework
 Imports System.Collections.Generic
 
 Public Class Tetris
@@ -103,24 +99,21 @@ ExitFor:
     End Function
 
     Public Function CanRotate(sBlock As TetrisBlock, Direction As TetrisBlock.Direction) As Boolean
+        If sBlock.Shape = TetrisBlock.BlockType.o Then Return True
         Dim S As Point = sBlock.CalculateSize()
         Dim nOffset As Point = sBlock.Offset(True), pOffset As Point = sBlock.Offset()
         If Direction = TetrisBlock.Direction.Left Then
             For i As Integer = sBlock.blockData.Count - 1 To 0 Step -1
-                If sBlock.blockData(i).Y <= 1 Then Return False
-                Dim P As New Point(sBlock.blockData(i).X + S.X, sBlock.blockData(i).Y + S.Y)
-                P = P - (nOffset)
+                ' Mirror the exact transform in DoLeftRotation
+                Dim P As Point = sBlock.blockData(i)
+                P = P + (nOffset)
                 P = New Point(P.Y, S.X - P.X)
-                P = P - (pOffset)
-                If sBlock.Shape = TetrisBlock.BlockType.i Then
-                    If P.X > Columns + 2 Or P.Y > Rows - S.Y Then
-                        Return False
-                    End If
-                Else
-                    If P.X > Columns + S.X Or P.Y > Rows - S.Y Then
-                        Return False
-                    End If
+                P = P + (pOffset)
+                ' Boundary check
+                If P.X < 0 OrElse P.X >= Columns OrElse P.Y < 0 OrElse P.Y >= Rows Then
+                    Return False
                 End If
+                ' Collision check
                 For Each Block As TetrisBlock In blockData
                     If Block IsNot sBlock Then
                         For Each point As Point In Block.blockData
@@ -131,20 +124,16 @@ ExitFor:
             Next
         ElseIf Direction = TetrisBlock.Direction.Right Then
             For i As Integer = 0 To sBlock.blockData.Count - 1
-                If sBlock.blockData(i).Y <= 1 Then Return False
-                Dim P As New Point(sBlock.blockData(i).X - S.X, sBlock.blockData(i).Y - S.Y)
-                P = P - (nOffset)
+                ' Mirror the exact transform in DoRightRotation
+                Dim P As Point = sBlock.blockData(i)
+                P = P + (nOffset)
                 P = New Point(S.Y - P.Y, P.X)
-                P = P - (pOffset)
-                If sBlock.Shape = TetrisBlock.BlockType.i Then
-                    If P.X > Columns + 2 Or P.Y > Rows - S.Y Then
-                        Return False
-                    End If
-                Else
-                    If P.X > Columns + S.X Or P.Y > Rows - S.Y Then
-                        Return False
-                    End If
+                P = P + (pOffset)
+                ' Boundary check
+                If P.X < 0 OrElse P.X >= Columns OrElse P.Y < 0 OrElse P.Y >= Rows Then
+                    Return False
                 End If
+                ' Collision check
                 For Each Block As TetrisBlock In blockData
                     If Block IsNot sBlock Then
                         For Each point As Point In Block.blockData
@@ -179,7 +168,7 @@ ExitFor:
         For i As Integer = 0 To 53
             Dim RandomNum As TetrisBlock.BlockType = CType(R.Next(0, 6), TetrisBlock.BlockType)
             Dim RandomColor As Color = New Color(255, R.Next(0, 255), R.Next(0, 255), R.Next(0, 255))
-            Dim T As New TetrisBlock(RandomNum, RandomColor)
+            Dim T As New TetrisBlock(RandomNum, RandomColor, New Point(Columns, Rows))
             spawnList.Add(T)
         Next
     End Sub
@@ -188,10 +177,12 @@ ExitFor:
         If CanSpawn() AndAlso spawnList.Count > 0 Then
             blockData.Add(spawnList(0))
             spawnList.RemoveAt(0)
-            RaiseEvent NextBlockChanged(spawnList(0))
-        ElseIf spawnList.Count = 0 Then
-            blockData.Clear()
-            spawnList.Clear()
+            If spawnList.Count > 0 Then
+                RaiseEvent NextBlockChanged(spawnList(0))
+            End If
+        End If
+        ' Refill the spawn list when it runs out (without clearing the board)
+        If spawnList.Count = 0 Then
             GenerateSpawnList()
         End If
     End Sub
@@ -263,6 +254,8 @@ ExitFor:
 
     Public Sub New(GridSize As Point)
         Me.gridSize = GridSize
+        Me.Columns = GridSize.X
+        Me.Rows = GridSize.Y
         GenerateSpawnList()
     End Sub
 

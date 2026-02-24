@@ -46,6 +46,7 @@
   <!-- Keep resources -->
   <ItemGroup>
     <None Include=".github\copilot-instructions.md" />
+    <None Include=".github\upgrades\scenarios\new-dotnet-version_64215c\plan.md" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>

@@ -17,11 +17,11 @@ Partial Public Class zWindow
         sceneManager = New SceneManager(Me, 60)
 
         ' Create The Main Scene
-        Dim MainScene As New MainScene(sceneManager)
-        sceneManager.AddScene("Main", MainScene)
+        Dim Tetris As New TetrisViewport(sceneManager)
+        sceneManager.AddScene("Tetris", Tetris)
 
         ' This is how your application knows what to draw and when to draw it.
-        sceneManager.ActiveScene = MainScene
+        sceneManager.ActiveScene = Tetris
     End Sub
 
     Protected Overrides Sub UnloadContent()

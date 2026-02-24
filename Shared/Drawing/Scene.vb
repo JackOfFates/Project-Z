@@ -513,8 +513,7 @@ Namespace [Shared].Drawing
         End Sub
 
         ''' <summary>
-        ''' Draws elements and their children recursively.
-        ''' Children are sorted by their local z-index within their parent container.
+        ''' Draws elements with clipping support.
         ''' </summary>
         Private Overloads Sub DrawElements(Elements As IEnumerable(Of SceneElement), ForceClip As Boolean)
             ' Cache graphics device reference outside the loop
@@ -528,13 +527,11 @@ Namespace [Shared].Drawing
         End Sub
 
         ''' <summary>
-        ''' Recursively draws an element and all its children.
+        ''' Draws an element with optional clipping support.
+        ''' Children are already in I_Elements via _Children_ChildAdded and drawn in the main loop.
         ''' </summary>
         Private Sub DrawElementRecursive(E As SceneElement, gd As GraphicsDevice, viewportRect As Rectangle, ForceClip As Boolean)
             If Not E.isVisible Then Return
-
-            ' --- Layout pass: compute Rectangle for this element ---
-            LayoutElement(E, gd)
 
             Dim Start As Long = Diagnostics.Stopwatch.GetTimestamp
             Dim previousScissor As Rectangle = gd.ScissorRectangle
@@ -578,15 +575,6 @@ Namespace [Shared].Drawing
             E.ValidationCheck()
             E.doDraw(gameTime)
 
-            ' Draw children sorted by their local z-index (ascending order so higher z-index draws last/on top)
-            ' Secondary sort by add order for elements with same z-index
-            If E.Children.Count > 0 Then
-                Dim sortedChildren = E.Children.OrderBy(Function(x) x.zIndex).ThenBy(Function(x) E.Children.IndexOf(x)).ToList()
-                For Each child As SceneElement In sortedChildren
-                    DrawElementRecursive(child, gd, viewportRect, E.Clip OrElse ForceClip)
-                Next
-            End If
-
             ' Notify draw finished
             Dim elapsedTime As TimeSpan = TimeSpan.FromTicks(Diagnostics.Stopwatch.GetTimestamp - Start)
             E.OnDrawFinished(elapsedTime)
@@ -595,51 +583,6 @@ Namespace [Shared].Drawing
             If needsClipRestore Then
                 gd.ScissorRectangle = previousScissor
             End If
-        End Sub
-
-        ' Layout pass: computes Rectangle for a SceneElement using Position, Size, Margin, Stretch, and alignment
-        Private Sub LayoutElement(E As SceneElement, gd As GraphicsDevice)
-            Dim parentRect As Rectangle = If(E.Parent IsNot Nothing, E.Parent.Rectangle, New Rectangle(0, 0, CInt(gd.Viewport.Width), CInt(gd.Viewport.Height)))
-            Dim pos As Vector2 = E.Position
-            Dim size As Vector2 = E.Size
-            Dim margin As Thickness = E.Margin
-
-            ' Stretch logic: fill parent minus margin if StretchToParent
-            If E.StretchToParent AndAlso E.Parent IsNot Nothing Then
-                size = New Vector2(Math.Max(0, parentRect.Width - margin.Left - margin.Right), Math.Max(0, parentRect.Height - margin.Top - margin.Bottom))
-                pos = New Vector2(margin.Left, margin.Top)
-            End If
-
-            ' Alignment logic (if not stretching)
-            If Not E.StretchToParent AndAlso E.Parent IsNot Nothing Then
-                If E.HorizontalAlign = HorizontalAlignment.Center Then
-                    pos.X = (parentRect.Width - size.X) / 2 + margin.Left - margin.Right
-                ElseIf E.HorizontalAlign = HorizontalAlignment.Right Then
-                    pos.X = parentRect.Width - size.X - margin.Right
-                ElseIf E.HorizontalAlign = HorizontalAlignment.Stretch Then
-                    pos.X = margin.Left
-                    size.X = Math.Max(0, parentRect.Width - margin.Left - margin.Right)
-                Else ' Left
-                    pos.X = margin.Left
-                End If
-                If E.VerticalAlign = VerticalAlignment.Center Then
-                    pos.Y = (parentRect.Height - size.Y) / 2 + margin.Top - margin.Bottom
-                ElseIf E.VerticalAlign = VerticalAlignment.Bottom Then
-                    pos.Y = parentRect.Height - size.Y - margin.Bottom
-                ElseIf E.VerticalAlign = VerticalAlignment.Stretch Then
-                    pos.Y = margin.Top
-                    size.Y = Math.Max(0, parentRect.Height - margin.Top - margin.Bottom)
-                Else ' Top
-                    pos.Y = margin.Top
-                End If
-            End If
-
-            ' Clamp to min/max size
-            size.X = Math.Max(E.MinSize.X, Math.Min(E.MaxSize.X, size.X))
-            size.Y = Math.Max(E.MinSize.Y, Math.Min(E.MaxSize.Y, size.Y))
-
-            ' Set Rectangle property for rendering/hit-testing
-            E.Rectangle = New Rectangle(CInt(parentRect.X + pos.X), CInt(parentRect.Y + pos.Y), CInt(size.X), CInt(size.Y))
         End Sub
 
         Public Overridable Sub ApplyEffects()
@@ -887,9 +830,9 @@ Namespace [Shared].Drawing
                 isInitialized = True
             End If
 
-            ' Iterate over root elements and tick them recursively (includes children)
+            ' Tick all elements (children are already in I_Elements via _Children_ChildAdded)
             For Each element In I_Elements.Values
-                TickElementRecursive(element, gameTime)
+                element.Tick(gameTime)
             Next
 
             InternalFPS += 1
@@ -901,16 +844,6 @@ Namespace [Shared].Drawing
                 LastTick = gameTime.TotalGameTime.Ticks
                 InternalFPS = 0
             End If
-        End Sub
-
-        ''' <summary>
-        ''' Recursively ticks an element and all its children.
-        ''' </summary>
-        Private Sub TickElementRecursive(element As SceneElement, gameTime As GameTime)
-            element.Tick(gameTime)
-            For Each child In element.Children
-                TickElementRecursive(child, gameTime)
-            Next
         End Sub
 
         Public Sub New()
