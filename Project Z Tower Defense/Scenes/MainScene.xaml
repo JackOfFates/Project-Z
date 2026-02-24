@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    MainScene.xaml - Tower Defense Game UI Definition
+    This XAML file defines the UI layout for the main game scene.
+    Named elements (x:Name) generate fields in the Designer.vb file.
+    
+    Uses WPF proxy controls for Visual Studio designer preview.
+    At runtime, SceneXamlParser creates actual Project Z controls.
+-->
+<Window
+    x:Class="Designer.MainScene"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="MainScene"
+    Width="1280"
+    Height="720"
+    Background="#000000">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--  Side Panel  -->
+        <Border
+            x:Name="SidePanel"
+            Grid.Row="0"
+            Grid.Column="0"
+            Background="#161616" />
+
+        <!--  Play Field  -->
+        <Border
+            x:Name="PlayField"
+            Grid.Row="0"
+            Grid.Column="1"
+            Background="#0C0C0C" />
+
+        <!--  HUD and Controls in Side Panel  -->
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="16,24,16,16"
+            VerticalAlignment="Top">
+            <TextBlock
+                x:Name="EnemiesText"
+                Margin="0,0,0,8"
+                Foreground="White"
+                Text="Enemies: 0" />
+            <TextBlock
+                x:Name="LevelText"
+                Margin="0,0,0,8"
+                Foreground="White"
+                Text="Level: 1" />
+            <TextBlock
+                x:Name="CurrencyText"
+                Margin="0,0,0,8"
+                Foreground="White"
+                Text="Currency: 0" />
+            <TextBlock
+                x:Name="HealthText"
+                Margin="0,0,0,8"
+                Foreground="White"
+                Text="Health: 0" />
+            <TextBlock
+                x:Name="TowerHintText"
+                Width="188"
+                Margin="0,0,0,8"
+                Foreground="LightGray"
+                Text="Drag towers onto the map, click to upgrade"
+                TextWrapping="Wrap" />
+            <TextBlock
+                x:Name="NetworkModeText"
+                Margin="0,0,0,16"
+                Foreground="LightGray"
+                Text="Mode: Host" />
+            <Button
+                x:Name="HostButton"
+                Width="180"
+                Height="32"
+                Margin="0,0,0,8"
+                Background="#323232"
+                Content="Host" />
+            <Button
+                x:Name="ClientButton"
+                Width="180"
+                Height="32"
+                Margin="0,0,0,8"
+                Background="#323232"
+                Content="Client" />
+            <Button
+                x:Name="StartButton"
+                Width="180"
+                Height="32"
+                Margin="0,0,0,8"
+                Background="#323232"
+                Content="Start" />
+            <Button
+                x:Name="StopButton"
+                Width="180"
+                Height="32"
+                Margin="0,0,0,24"
+                Background="#323232"
+                Content="Stop" />
+            <Button
+                x:Name="SpiralTowerButton"
+                Width="180"
+                Height="32"
+                Margin="0,0,0,8"
+                Background="#323232"
+                Content="Spiral" />
+            <Button
+                x:Name="PointTowerButton"
+                Width="180"
+                Height="32"
+                Margin="0,0,0,8"
+                Background="#323232"
+                Content="Point" />
+            <Button
+                x:Name="BurstTowerButton"
+                Width="180"
+                Height="32"
+                Margin="0,0,0,8"
+                Background="#323232"
+                Content="Burst" />
+            <Button
+                x:Name="RapidTowerButton"
+                Width="180"
+                Height="32"
+                Margin="0,0,0,8"
+                Background="#323232"
+                Content="Rapid" />
+            <Button
+                x:Name="SniperTowerButton"
+                Width="180"
+                Height="32"
+                Margin="0,0,0,8"
+                Background="#323232"
+                Content="Sniper" />
+            <Button
+                x:Name="BombButton"
+                Width="180"
+                Height="32"
+                Margin="0,0,0,8"
+                Background="#323232"
+                Content="Bomb ($5)" />
+        </StackPanel>
+
+        <!--  Tower Menu (initially hidden off-screen)  -->
+        <Border
+            x:Name="TowerMenuBackground"
+            Grid.Row="0"
+            Grid.Column="1"
+            Width="160"
+            Height="200"
+            Margin="24,24,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="#282828F0"
+            Visibility="Collapsed" />
+        <TextBlock
+            x:Name="TowerMenuTitle"
+            Grid.Row="0"
+            Grid.Column="1"
+            Margin="32,32,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Foreground="White"
+            Text="Tower Menu"
+            Visibility="Collapsed" />
+        <Button
+            x:Name="UpgradeButton"
+            Grid.Row="0"
+            Grid.Column="1"
+            Width="140"
+            Height="28"
+            Margin="32,72,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="#323232"
+            Content="Upgrade"
+            Visibility="Collapsed" />
+        <Button
+            x:Name="SellButton"
+            Grid.Row="0"
+            Grid.Column="1"
+            Width="140"
+            Height="28"
+            Margin="32,108,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="#323232"
+            Content="Sell"
+            Visibility="Collapsed" />
+        <Button
+            x:Name="TargetFirstButton"
+            Grid.Row="0"
+            Grid.Column="1"
+            Width="65"
+            Height="24"
+            Margin="32,148,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="#3C3C3C"
+            Content="First"
+            Visibility="Collapsed" />
+        <Button
+            x:Name="TargetLastButton"
+            Grid.Row="0"
+            Grid.Column="1"
+            Width="65"
+            Height="24"
+            Margin="104,148,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="#3C3C3C"
+            Content="Last"
+            Visibility="Collapsed" />
+        <Button
+            x:Name="TargetClosestButton"
+            Grid.Row="0"
+            Grid.Column="1"
+            Width="65"
+            Height="24"
+            Margin="32,180,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="#3C3C3C"
+            Content="Closest"
+            Visibility="Collapsed" />
+        <Button
+            x:Name="TargetStrongestButton"
+            Grid.Row="0"
+            Grid.Column="1"
+            Width="65"
+            Height="24"
+            Margin="104,180,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="#3C3C3C"
+            Content="Strong"
+            Visibility="Collapsed" />
+        <Button
+            x:Name="TargetWeakestButton"
+            Grid.Row="0"
+            Grid.Column="1"
+            Width="65"
+            Height="24"
+            Margin="32,212,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="#3C3C3C"
+            Content="Weak"
+            Visibility="Collapsed" />
+        <Button
+            x:Name="CloseMenuButton"
+            Grid.Row="0"
+            Grid.Column="1"
+            Width="24"
+            Height="24"
+            Margin="160,24,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="#323232"
+            Content="X"
+            Visibility="Collapsed" />
+
+        <!--  Tooltip (initially hidden off-screen)  -->
+        <Border
+            x:Name="TooltipBackground"
+            Grid.Row="0"
+            Grid.Column="1"
+            Width="200"
+            Height="80"
+            Margin="300,24,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Background="#1E1E1EE6"
+            Visibility="Collapsed" />
+        <TextBlock
+            x:Name="TooltipText"
+            Grid.Row="0"
+            Grid.Column="1"
+            Margin="308,32,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Foreground="White"
+            Text=""
+            Visibility="Collapsed" />
+        <!--  Range Indicator (initially hidden)  -->
+        <Ellipse
+            x:Name="RangeIndicator"
+            Grid.Row="0"
+            Grid.Column="1"
+            Width="100"
+            Height="100"
+            Margin="400,200,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Fill="#64C8643C"
+            Visibility="Hidden" />
+    </Grid>
+</Window>

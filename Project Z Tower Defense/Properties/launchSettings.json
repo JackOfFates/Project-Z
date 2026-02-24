@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Project Z UI Designer": {
+      "commandName": "Project",
+      "workingDirectory": "$(ProjectDir)",
+      "nativeDebugging": false
+    }
+  }
+}

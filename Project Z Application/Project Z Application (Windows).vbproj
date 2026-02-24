@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3A65FFAA-87FA-4166-B916-2DCCD6CE4486}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ProjectZ_Application</RootNamespace>
+    <AssemblyName>Project Z Application</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <StartupObject>ProjectZ_Application.Program</StartupObject>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Windows\Debug\</OutputPath>
+    <DefineConstants>DEBUG,TRACE,WINDOWS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Windows\Release\</OutputPath>
+    <DefineConstants>TRACE,WINDOWS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>On</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG,TRACE,WINDOWS</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE,WINDOWS</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AuthenticatedResponse.vb" />
+    <Compile Include="Game\Tetris.vb" />
+    <Compile Include="Game\TetrisBlock.vb" />
+    <Compile Include="RequestTicket.vb" />
+    <Compile Include="Scenes\TestScene.vb" />
+    <Compile Include="Scenes\MainScene.vb" />
+    <Compile Include="zWindow.vb" />
+    <Compile Include="Program.vb" />
+    <Compile Include="Properties\AssemblyInfo.vb" />
+    <Compile Include="zWindow_Generated.vb">
+      <InProject>false</InProject>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Kni.Platform, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Project Z Windows\packages\nkast.Kni.Platform.SDL2.GL.4.2.9001.1\lib\net40\Kni.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Project Z Audio">
+      <HintPath>..\Project Z Audio\bin\Debug\Project Z Audio.dll</HintPath>
+    </Reference>
+    <Reference Include="Project Z Extensions">
+      <HintPath>..\Project Z Extensions\bin\Debug\Project Z Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="Triangle, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Project Z Windows\packages\Speckle.Triangle.1.0.0\lib\netstandard2.0\Triangle.dll</HintPath>
+    </Reference>
+    <Reference Include="Xna.Framework, Version=4.2.9001.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Project Z Windows\packages\nkast.Xna.Framework.4.2.9001\lib\net40\Xna.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Xna.Framework.Audio, Version=4.2.9001.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Project Z Windows\packages\nkast.Xna.Framework.Audio.4.2.9001\lib\net40\Xna.Framework.Audio.dll</HintPath>
+    </Reference>
+    <Reference Include="Xna.Framework.Content, Version=4.2.9001.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Project Z Windows\packages\nkast.Xna.Framework.Content.4.2.9001\lib\net40\Xna.Framework.Content.dll</HintPath>
+    </Reference>
+    <Reference Include="Xna.Framework.Game, Version=4.2.9001.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Project Z Windows\packages\nkast.Xna.Framework.Game.4.2.9001\lib\net40\Xna.Framework.Game.dll</HintPath>
+    </Reference>
+    <Reference Include="Xna.Framework.Graphics, Version=4.2.9001.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Project Z Windows\packages\nkast.Xna.Framework.Graphics.4.2.9001\lib\net40\Xna.Framework.Graphics.dll</HintPath>
+    </Reference>
+    <Reference Include="Xna.Framework.Input, Version=4.2.9001.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Project Z Windows\packages\nkast.Xna.Framework.Input.4.2.9001\lib\net40\Xna.Framework.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="Xna.Framework.Media, Version=4.2.9001.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\Project Z Windows\packages\nkast.Xna.Framework.Media.4.2.9001\lib\net40\Xna.Framework.Media.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\Textures\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Fonts\Segoe UI\SegoeUI_10.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Fonts\Segoe UI\SegoeUI_12.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Fonts\Segoe UI\SegoeUI_14.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Fonts\Segoe UI\SegoeUI_18.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Fonts\Segoe UI\SegoeUI_24.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Fonts\Segoe UI\SegoeUI_36.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Fonts\Segoe UI\SegoeUI_48.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Fonts\Segoe UI\SegoeUI_72.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\Project Z Windows\packages\nkast.Kni.Platform.SDL2.GL.4.2.9001.1\build\nkast.Kni.Platform.SDL2.GL.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\Project Z Windows\packages\nkast.Kni.Platform.SDL2.GL.4.2.9001.1\build\nkast.Kni.Platform.SDL2.GL.targets'))" />
+  </Target>
+  <Import Project="..\Project Z Windows\packages\nkast.Kni.Platform.SDL2.GL.4.2.9001.1\build\nkast.Kni.Platform.SDL2.GL.targets" Condition="Exists('..\Project Z Windows\packages\nkast.Kni.Platform.SDL2.GL.4.2.9001.1\build\nkast.Kni.Platform.SDL2.GL.targets')" />
+</Project>

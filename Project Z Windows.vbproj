@@ -4,7 +4,7 @@
   <PropertyGroup>
 	<TargetFramework>net8.0-windows</TargetFramework>
 	<RootNamespace>ProjectZ</RootNamespace>
-	<AssemblyName>ProjectZ</AssemblyName>
+	<AssemblyName>Project-Z</AssemblyName>
 	<OptionStrict>On</OptionStrict>
 	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 	<UseWindowsForms>true</UseWindowsForms>
@@ -19,8 +19,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Project Z Application\**" />
+    <Compile Remove="Project Z Audio\**" />
     <Compile Remove="Project Z Test\**" />
+    <Compile Remove="Project Z Tower Defense\**" />
+    <Compile Remove="Project Z Video FX\**" />
+    <Compile Remove="Project Z.sln.ide\**" />
+    <None Remove="Project Z Application\**" />
+    <None Remove="Project Z Audio\**" />
     <None Remove="Project Z Test\**" />
+    <None Remove="Project Z Tower Defense\**" />
+    <None Remove="Project Z Video FX\**" />
+    <None Remove="Project Z.sln.ide\**" />
   </ItemGroup>
 
   <!-- MonoGame DesktopGL (OpenGL) -->
