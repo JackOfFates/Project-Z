@@ -4,7 +4,7 @@
   <PropertyGroup>
 	<TargetFramework>net8.0-windows</TargetFramework>
 	<RootNamespace>ProjectZ</RootNamespace>
-	<AssemblyName>Project Z</AssemblyName>
+	<AssemblyName>ProjectZ</AssemblyName>
 	<OptionStrict>On</OptionStrict>
 	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 	<UseWindowsForms>true</UseWindowsForms>
@@ -14,6 +14,8 @@
 	<UseApplicationFramework>True</UseApplicationFramework>
 	<SingleInstance>True</SingleInstance>
 	<EnableVisualStyles>True</EnableVisualStyles>
+	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	<Version>2.0.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -30,9 +32,6 @@
   </ItemGroup>
 
   <!-- Project references retained as project references -->
-  <ItemGroup>
-    <ProjectReference Include="..\Project Z Extensions\Project Z Extensions.vbproj" />
-  </ItemGroup>
 
   <!-- Keep resources -->
   <ItemGroup>
