@@ -16,7 +16,7 @@
 	<SingleInstance>True</SingleInstance>
 	<EnableVisualStyles>True</EnableVisualStyles>
 	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	<Version>2.0.0.0</Version>
+	<Version>2.0.1.0</Version>
 	<Title>Project Z</Title>
 	<Description>An XNA UI Framework that runs on modern .NET 8.0</Description>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
@@ -26,6 +26,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="packages\**" />
     <Compile Remove="Project Z Application\**" />
     <Compile Remove="Project Z Audio\**" />
     <Compile Remove="Project Z Test\**" />
@@ -33,6 +34,7 @@
     <Compile Remove="Project Z Video FX\**" />
     <Compile Remove="Project Z.sln.ide\**" />
     <Compile Remove="ProjectTemplate\**" />
+    <None Remove="packages\**" />
     <None Remove="Project Z Application\**" />
     <None Remove="Project Z Audio\**" />
     <None Remove="Project Z Test\**" />
@@ -40,6 +42,8 @@
     <None Remove="Project Z Video FX\**" />
     <None Remove="Project Z.sln.ide\**" />
     <None Remove="ProjectTemplate\**" />
+    <Page Remove="packages\**" />
+    <Page Remove="Project Z Tower Defense\**" />
   </ItemGroup>
 
   <!-- MonoGame DesktopGL (OpenGL) -->
