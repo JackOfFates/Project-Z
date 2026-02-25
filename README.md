@@ -33,10 +33,14 @@ Whether you're building interactive visualizers, creative tools, or games, Proje
 
 ## 🖼️ Screenshots
 
+### XAML Design Time
 ![Screenshot 1](https://raw.githubusercontent.com/JackOfFates/Project-Z/master/Images/Screenshot_00000.PNG)
+
+### In-Game UI Runtime
 ![Screenshot 2](https://raw.githubusercontent.com/JackOfFates/Project-Z/master/Images/Screenshot_00001.jpg)
+
+### Tetris Demo
 ![Screenshot 3](https://raw.githubusercontent.com/JackOfFates/Project-Z/master/Images/Screenshot_00002.jpg)
-![Screenshot 4](https://raw.githubusercontent.com/JackOfFates/Project-Z/master/Images/Screenshot_00003.jpg)
 
 ## 📦 Installation
 
